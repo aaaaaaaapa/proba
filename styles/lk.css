@@ -1,0 +1,23 @@
+.lk {
+    width: 100%;
+}
+
+.nav {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid;
+}
+
+.information, .transaction {
+    padding: 30px;
+}
+
+.section-title {
+    margin-bottom: 10px;
+}
+
+.section-text {
+    font-size: 18px;
+}
