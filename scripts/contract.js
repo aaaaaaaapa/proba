@@ -1,4 +1,4 @@
-const contractAddress = "0xE667751C3C97296C3762fcBF3a42ab9b6A2933B3";
+const contractAddress = "0xfAb68149d1F41D4e84dba166fd18019723597F7a";
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
 
 const abi = [
@@ -79,7 +79,12 @@ const abi = [
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
+						"name": "isAvaible",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isReceived",
 						"type": "bool"
 					},
 					{
@@ -128,7 +133,12 @@ const abi = [
 			},
 			{
 				"internalType": "bool",
-				"name": "status",
+				"name": "isAvaible",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isReceived",
 				"type": "bool"
 			},
 			{
@@ -148,10 +158,16 @@ export const getAllAccounts = async () => {
     return await web3.eth.getAccounts();
 }
 
+export const convertToEth = (sum) => {
+	const balance = Number(web3.utils.fromWei(sum, 'ether'));
+	const rounedBalance = Math.round(balance * 100) / 100;
+	return String(rounedBalance);
+}
+
 export const getBalanceOf = async (address) => {
     try {
         const balance = await web3.eth.getBalance(address);
-        return web3.utils.fromWei(balance, 'ether').slice(0, 5);
+        return convertToEth(balance);
     }
     catch (e) {
         throw new Error(e);
@@ -176,8 +192,10 @@ export const getRecipientTransfers = async (currentAccount) => {
 
 }
 
-export const transformDate = async (date) => {
-    return new Date(date * 1000);
+export const transformDate = (date) => {
+	const strDate = new Date(date * 1000);
+	const formatter = new Intl.DateTimeFormat('ru-RU');
+	return formatter.format(strDate);
 }
 
 

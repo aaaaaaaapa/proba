@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./scripts/web3.min.js" defer></script>
+    <script type="module" src="./scripts/contract.js" defer></script>
+    <script type="module" src="./scripts/lk.js" defer></script>
+    <link rel="stylesheet" href="./styles/lk.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1 class="lk-header">Личный кабинет</h1>
+        </div>
+        <div class="main">
+            <div class="information">
+                <h2 class="section-title">
+                    Информация об аккаунте
+                </h2>
+                <p class="section-text" id="account">Ваш аккаунт:</p>
+                <p class="section-text" id="balance">Баланс: ETH</p>
+            </div>
+            <div class="transaction">
+                <h2 class="section-title">Транзакции</h2>
+                <p class="section-text">Создать транзакцию</p>
+                <form class="trasfer-form">
+                    <input type="text" id="address" class="form-input" placeholder="Адрес получателя">
+                    <input type="text" id="code" class="form-input" placeholder="Кодовое слово (для получения транзакции)">
+                    <div class="sum">
+                        <input type="number" id="sum" class="form-input" placeholder="Сумма (в ETH)">
+                    </div>
+                    <button class="transfer-btn">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
