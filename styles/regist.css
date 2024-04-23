@@ -1,36 +1,72 @@
-* {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+body {
+    background-color: rgb(116, 92, 255);
 }
 
 .container {
     display: flex;
     width: 100%;
     height: 100%;
-    flex-direction: column;
+    font-size: 16px;
+}
+
+.wrapper {
+    display: block;
+    width: 550px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 7% auto;
+    padding: 40px 50px;
 }
 
 .registr-header {
     display: flex;
-    margin: 10% auto 0;
+    justify-content: center;
     font-size: 40px;
+    margin: 0 auto 30px;
 }
 
 .registration-form {
+    display: flex;
+    flex-direction: column;
     border: 1px solid black;
-    margin: 50px auto 10%;
-    padding: 20px;
-    min-width: 530px;
+    padding: 30px 45px;
+    margin: 10px auto;
+    min-height: 130px;
 }
 
 .select-cont {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    min-height: 60px;
 }
 
 .account-select {
-    font-size: 15px;
+    font-size: 16px;
+    padding: 5px 7px;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.account-option {
+    font-size: 18px;
+}
+
+.registration-btn {
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(107, 81, 253);
+    color: white;
+    font-size: 16px;
+}
+
+.registration-btn:hover {
+    transition: 0.3s;
+    background-color: rgb(205, 205, 205);
+    color: black;
 }

@@ -1,0 +1,94 @@
+.modal {
+    position: fixed; 
+    z-index: 1;
+    top: 90px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.245);
+}
+
+.modal-cont {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+}
+
+/* cr-trans */
+
+.trasfer-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    border-radius: 10px;
+    min-height: 300px;
+    background-color: white;
+}
+
+.form-title {
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+.form-input {
+    font-size: 18px;
+    min-width: 470px;
+    min-height: 15px;
+    padding: 10px;
+}
+
+.transfer-btn {
+    display: inline;
+    font-size: 14px;
+    max-width: 100px;
+    padding: 3px;
+}
+
+.transfer-btn {
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(107, 81, 253);
+    color: white;
+    font-size: 16px;
+    min-width: 120px;
+}
+
+.transfer-btn[disabled] {
+    background-color: rgb(205, 205, 205);
+    color: black;
+}
+
+.transfer-btn:hover {
+    transition: 0.3s;
+    background-color: rgb(205, 205, 205);
+    color: black;
+}
+
+.form-text {
+    display: flex;
+    justify-content: flex-end;
+    min-width: 100%;
+}
+
+.close-text {
+    margin-left: 60px;
+    font-size: 14px;
+}
+
+.close-text:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.dis {
+    display: none;
+}
+
+.hide {
+    overflow: hidden;
+}

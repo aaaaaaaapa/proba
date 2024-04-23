@@ -1,4 +1,4 @@
-const contractAddress = "0xfAb68149d1F41D4e84dba166fd18019723597F7a";
+const contractAddress = "0x45563772b06d113F9d0c074B69D4b18111B20335";
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
 
 const abi = [
@@ -151,6 +151,7 @@ const abi = [
 		"type": "function"
 	}
 ];
+const currentAccount = sessionStorage.currentAccount;
 
 const contract = new web3.eth.Contract(abi, contractAddress, {gas: 300000});
 
@@ -164,13 +165,17 @@ export const convertToEth = (sum) => {
 	return String(rounedBalance);
 }
 
+export const convertToWei = (sum) => {
+	return web3.utils.toWei(sum);
+}
+
 export const getBalanceOf = async (address) => {
     try {
         const balance = await web3.eth.getBalance(address);
         return convertToEth(balance);
     }
     catch (e) {
-        throw new Error(e);
+        console.log(e);
     }
 }
 
@@ -193,9 +198,17 @@ export const getRecipientTransfers = async (currentAccount) => {
 }
 
 export const transformDate = (date) => {
+
 	const strDate = new Date(date * 1000);
 	const formatter = new Intl.DateTimeFormat('ru-RU');
+	
 	return formatter.format(strDate);
 }
+
+export const createTransfer = (recipient, code, sum) => {
+	contract.methods.createTransfer(recipient, code).send({from: currentAccount, value: convertToWei(sum)});
+}
+
+// console.log(createTransfer('0x93d5eD3c068Ba317b205BE35EC3aa2ecA4be0010', 'ass', '12'))
 
 
