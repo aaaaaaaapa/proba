@@ -1,6 +1,5 @@
-const contractAddress = "0x20e8e4B515c1844D3c8e06Aaa10a3316C284f159";
+const contractAddress = "0xe6F576Ee775C2AE6875C0cf005d66aF3aB97302C";
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
-
 const abi = [
 	{
 		"inputs": [
@@ -151,6 +150,7 @@ const abi = [
 		"type": "function"
 	}
 ];
+
 const currentAccount = sessionStorage.currentAccount;
 
 const contract = new web3.eth.Contract(abi, contractAddress, {gas: 300000});
@@ -179,22 +179,42 @@ export const getBalanceOf = async (address) => {
     }
 }
 
+export const getAllTransfers = async () => {
+	return await contract.methods.getTransfers().call();
+}
+
+const getAllTransfersObj = async () => {
+	return Object.assign({}, await contract.methods.getTransfers().call())
+}
+
 export const getSenderTransfers = async (currentAccount) => {
 
-    const trasfers = await contract.methods.getTransfers().call();
-    return trasfers.filter(item => {
-        return item.sender === currentAccount;
-    });
+	const trasfers = await getAllTransfers();
+	return trasfers.filter(elem => {
+		return elem.sender === currentAccount;
+	});
+}
+
+export const getSenderTransfersObj = async (currentAccount) => {
+
+    const trasfers = await getAllTransfersObj();
+    
+	return Object.fromEntries(Object.entries(trasfers).
+    filter(([key, val]) => val.sender === currentAccount));
 
 }
 
-export const getRecipientTransfers = async (currentAccount) => {
+export const getRecipientTransfersObj = async (currentAccount) => {
 
-    const trasfers = await contract.methods.getTransfers().call();
-    return trasfers.filter(item => {
-        return item.recipient === currentAccount;
-    });
+    const trasfers = await getAllTransfersObj();
+    
+	return Object.fromEntries(Object.entries(trasfers).
+    filter(([key, val]) => val.recipient === currentAccount));
 
+}
+
+export const cancelTransfer = (id) => {
+	contract.methods.cancelTransfer(id).send({from: currentAccount});
 }
 
 export const transformDate = (date) => {
@@ -210,8 +230,11 @@ export const createTransfer = async (recipient, code, sum) => {
 		if (error) {
 			return error;
 		}
-		return receipt.status;
 	});
+}
+
+export const getMoney = async (id, code) => {
+	return await contract.methods.getMoney(id, code).send({from: currentAccount});
 }
 
 // console.log(createTransfer('0x93d5eD3c068Ba317b205BE35EC3aa2ecA4be0010', 'ass', '1'))

@@ -1,6 +1,5 @@
 import { getAllAccounts } from "./contract.js";
 
-const cont = document.querySelector('.container');
 const select = document.querySelector('.account-select');
 const form = document.querySelector('.registration-form');
 

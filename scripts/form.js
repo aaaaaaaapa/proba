@@ -1,11 +1,12 @@
-import { createTransfer, getBalanceOf } from "./contract.js";
+import { createTransfer, getSenderTransfersObj, getBalanceOf } from "./contract.js";
 import { showInformation } from "./lk.js";
 
 const liCreateTrans = document.getElementById('create-transfer');
 const modal = document.querySelector('.form');
 const transForm = document.querySelector('.trasfer-form');
 const submitBtn = document.querySelector('.transfer-btn');
-const closeText = document.querySelector('.close-text');
+const closeText = document.querySelectorAll('.close-text')[0];
+
 
 const handleFormSubmit = async () => {
 
@@ -22,9 +23,10 @@ const handleFormSubmit = async () => {
         modal.classList.add('dis');
         alert('Перевод успешно выполнен');
         showInformation();
+        submitBtn.disabled = true;
     } 
     catch (error) {
-        alert(error)
+        alert(error);
     }
 }
 
@@ -50,8 +52,4 @@ liCreateTrans.addEventListener('click', () => {
 
 closeText.addEventListener('click', () => {
     modal.classList.add('dis');
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    submitBtn.disabled = true;
 });

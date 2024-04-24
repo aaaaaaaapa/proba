@@ -11,3 +11,63 @@
     display: flex;
     flex-direction: row;
 }
+
+.selected {
+    text-decoration: underline;
+}
+
+.transfer-list-item {
+    max-width: 460px;
+}
+
+.section-text {
+    cursor: pointer;
+}
+
+.code-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    border-radius: 10px;
+    min-height: 170px;
+    background-color: white;
+}
+
+.get-trans-btn {
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(107, 81, 253);
+    color: white;
+    font-size: 16px;
+    min-width: 120px;
+}
+
+.get-trans-btn[disabled] {
+    background-color: rgb(205, 205, 205);
+    color: black;
+}
+
+.cancel-btn, .get-btn {
+    position: relative;
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(107, 81, 253);
+    color: white;
+    font-size: 16px;
+    min-width: 120px;
+    max-height: 60px;
+    top: 60%;
+    right: 15%;
+}
+
+.get-btn {
+    top: 55%;
+}

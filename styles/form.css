@@ -71,18 +71,14 @@
 
 .form-text {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     min-width: 100%;
 }
 
 .close-text {
     margin-left: 60px;
     font-size: 14px;
-}
-
-.close-text:hover {
     cursor: pointer;
-    text-decoration: underline;
 }
 
 .dis {

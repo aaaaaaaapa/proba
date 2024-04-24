@@ -10,7 +10,7 @@
 
 
 .nav {
-    padding: 0 12%;
+    padding: 0 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -83,6 +83,10 @@
 
 /* trans */
 
+.li-cont {
+    display: flex;
+    flex-direction: row;
+}
 
 .trans-cont {
     margin-bottom: 15px;
@@ -90,6 +94,7 @@
 
 .transfer-list {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
