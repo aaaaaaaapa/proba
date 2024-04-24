@@ -1,4 +1,4 @@
-import { createTransfer, getAllAccounts, getBalanceOf } from "./contract.js";
+import { createTransfer, getBalanceOf } from "./contract.js";
 import { showInformation } from "./lk.js";
 
 const liCreateTrans = document.getElementById('create-transfer');
@@ -12,19 +12,16 @@ const handleFormSubmit = async () => {
     const { address, code, sum } = transForm.elements;
 
     try {
-        if (!(await getAllAccounts()).includes(address.value.trim())) {
-            throw new Error('Адрес не найден');
-        }
         if (Number(sum.value) <= 0) {
             throw new Error('Сумма перевода должна быть больше 0');
         }
         if (Number(sum.value) > Number(await getBalanceOf(sessionStorage.currentAccount))) {
             throw new Error('Недостаточно средств');
         }
-        createTransfer(address.value, code.value, sum.value);
+        await createTransfer(address.value, code.value, sum.value);
         modal.classList.add('dis');
+        alert('Перевод успешно выполнен');
         showInformation();
-        transForm.reset();
     } 
     catch (error) {
         alert(error)

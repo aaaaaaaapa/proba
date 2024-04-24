@@ -1,0 +1,13 @@
+.title {
+    margin-bottom: 20px;
+}
+
+.transfer-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.li-cont {
+    display: flex;
+    flex-direction: row;
+}

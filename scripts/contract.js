@@ -1,4 +1,4 @@
-const contractAddress = "0x45563772b06d113F9d0c074B69D4b18111B20335";
+const contractAddress = "0x20e8e4B515c1844D3c8e06Aaa10a3316C284f159";
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
 
 const abi = [
@@ -174,8 +174,8 @@ export const getBalanceOf = async (address) => {
         const balance = await web3.eth.getBalance(address);
         return convertToEth(balance);
     }
-    catch (e) {
-        console.log(e);
+    catch (error) {
+        throw new Error(error);
     }
 }
 
@@ -205,10 +205,13 @@ export const transformDate = (date) => {
 	return formatter.format(strDate);
 }
 
-export const createTransfer = (recipient, code, sum) => {
-	contract.methods.createTransfer(recipient, code).send({from: currentAccount, value: convertToWei(sum)});
+export const createTransfer = async (recipient, code, sum) => {
+	return await contract.methods.createTransfer(recipient, code).send({from: currentAccount, value: convertToWei(sum)}, (error, receipt) => {
+		if (error) {
+			return error;
+		}
+		return receipt.status;
+	});
 }
 
-// console.log(createTransfer('0x93d5eD3c068Ba317b205BE35EC3aa2ecA4be0010', 'ass', '12'))
-
-
+// console.log(createTransfer('0x93d5eD3c068Ba317b205BE35EC3aa2ecA4be0010', 'ass', '1'))

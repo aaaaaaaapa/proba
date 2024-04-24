@@ -5,22 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./scripts/web3.min.js" defer></script>
     <script type="module" src="./scripts/contract.js" defer></script>
-    <script type="module" src="./scripts/lk.js" defer></script>
     <script type="module" src="./scripts/create-list-item.js" defer></script>
     <script type="module" src="./scripts/form.js" defer></script>
+    <script type="module" src="./scripts/trans-history.js" defer></script>
     <link rel="stylesheet" href="./styles/lk.css">
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/form.css">
-    <title>Main</title>
+    <link rel="stylesheet" href="./styles/trans.css">
+    <title>Document</title>
 </head>
 <body>
-    <div class="alert">
-    </div>
-    <div class="container">
+     <div class="container">
         <div class="wrapper">
             <div class="nav">
                 <div class="left-bar">
-                    <a href="./lk.html"><h1 class="lk-header">Личный кабинет</h1></a>
+                   <a href="./lk.html"><h1 class="lk-header">Личный кабинет</h1></a>
                     <ul class="nav-list">
                         <li class="nav-list-item" id="create-transfer">Сделать перевод</li>
                         <li class="nav-list-item" id="show-transfer">Посмотреть все транзакции</li>
@@ -29,23 +28,14 @@
                 <a href="./registration.html">Выйти</a>
             </div>
             <div class="main">
-                <div class="information">
-                    <h2 class="section-title">
-                        Информация об аккаунте
-                    </h2>
-                    <div class="inform-cont">
-                        <span class="section-text-head">Адрес аккаунта:</span>
-                        <span class="section-text" id="account"></span>
-                    </div>
-                    <div class="inform-cont">
-                        <span class="section-text-head">Баланс:</span>
-                        <span class="section-text" id="balance"></span>
-                    </div>
+                <h2 class="section-title">
+                    История переводов
+                </h2>
+                <div class="title">
+                    <span class="section-text selected" id="sent">Мои переводы /</span>
+                    <span class="section-text" id="receiverd">Доступные переводы</span>
                 </div>
-                <div class="transaction">
-                    <h2 class="section-title">
-                        Недавние переводы
-                    </h2>
+                <div class="section">
                     <ul class="transfer-list">
                     </ul>
                 </div>
