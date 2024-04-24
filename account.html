@@ -5,24 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./scripts/web3.min.js" defer></script>
     <script type="module" src="./scripts/contract.js" defer></script>
+    <script type="module" src="./scripts/account.js" defer></script>
     <script type="module" src="./scripts/create-list-item.js" defer></script>
     <script type="module" src="./scripts/form.js" defer></script>
-    <script type="module" src="./scripts/trans-history.js" defer></script>
-    <link rel="stylesheet" href="./styles/lk.css">
+    <link rel="stylesheet" href="./styles/account.css">
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/form.css">
-    <link rel="stylesheet" href="./styles/trans.css">
-    <title>Document</title>
+    <title>Main</title>
 </head>
 <body>
     <div class="alert">
         <span class="alert-text">ошибка</span>
     </div>
-     <div class="container">
+    <div class="container">
         <div class="wrapper">
             <div class="nav">
                 <div class="left-bar">
-                   <a href="./lk.html"><h1 class="lk-header">Личный кабинет</h1></a>
+                    <a href="./account.html"><h1 class="lk-header">Личный кабинет</h1></a>
                     <ul class="nav-list">
                         <li class="nav-list-item" id="create-transfer">Сделать перевод</li>
                         <li class="nav-list-item" id="show-transfer">Посмотреть все транзакции</li>
@@ -31,15 +30,23 @@
                 <a href="./registration.html">Выйти</a>
             </div>
             <div class="main">
-                <h2 class="section-title">
-                    История переводов
-                </h2>
-                <div class="title">
-                    <span class="section-text selected" id="sent">Мои переводы</span>
-                    <span class="section-text">/</span>
-                    <span class="section-text" id="received">Доступные переводы</span>
+                <div class="information">
+                    <h2 class="section-title">
+                        Информация об аккаунте
+                    </h2>
+                    <div class="inform-cont">
+                        <span class="section-text-head">Адрес аккаунта:</span>
+                        <span class="section-text" id="account"></span>
+                    </div>
+                    <div class="inform-cont">
+                        <span class="section-text-head">Баланс:</span>
+                        <span class="section-text" id="balance"></span>
+                    </div>
                 </div>
-                <div class="section">
+                <div class="transaction">
+                    <h2 class="section-title">
+                        Недавние переводы
+                    </h2>
                     <ul class="transfer-list">
                     </ul>
                 </div>
@@ -51,7 +58,7 @@
             <form class="trasfer-form">
                 <div class="form-text">
                     <span class="form-title">Создание перевода</span>
-                    <span class="close-text">x</span>
+                    <span class="close-text">Закрыть</span>
                 </div>
                 <input type="text" id="address" class="form-input" placeholder="Адрес получателя" required>
                 <input type="text" id="code" class="form-input" placeholder="Кодовое слово (для получения транзакции)" required>
@@ -59,18 +66,6 @@
                     <input type="number" id="sum" class="form-input" placeholder="Сумма (в ETH)" required>
                 </div>
                 <button class="transfer-btn" disabled>Отправить</button>
-            </form>
-        </div>
-    </div>
-    <div class="modal input dis">
-        <div class="modal-cont">
-            <form class="code-form">
-                <div class="form-text">
-                    <span class="form-title">Введите кодовое слово</span>
-                    <span class="close-text">x</span>
-                </div>
-                <input type="text" id="code-inp" class="form-input" placeholder="Кодовое слово (для получения транзакции)" required>
-                <button class="get-trans-btn" disabled>Получить</button>
             </form>
         </div>
     </div>

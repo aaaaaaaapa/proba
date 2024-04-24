@@ -1,5 +1,5 @@
-import { createTransfer, getSenderTransfersObj, getBalanceOf } from "./contract.js";
-import { showInformation } from "./lk.js";
+import { createTransfer, getBalanceOf } from "./contract.js";
+import { showInformation } from "./account.js";
 
 const liCreateTrans = document.getElementById('create-transfer');
 const modal = document.querySelector('.form');
@@ -22,12 +22,13 @@ const handleFormSubmit = async () => {
         await createTransfer(address.value, code.value, sum.value);
         modal.classList.add('dis');
         alert('Перевод успешно выполнен');
-        showInformation();
         submitBtn.disabled = true;
     } 
     catch (error) {
         alert(error);
     }
+    showInformation();
+    renderSendTrans();
 }
 
 transForm.addEventListener('submit', (event) => {

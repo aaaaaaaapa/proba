@@ -25,6 +25,21 @@ const getTransfers = async () => {
     return Object.entries(trans);
 }
 
+const createTypeBtn = (type) => {
+    
+    let btn;
+    if (type === 'sent') {
+        btn = createBtn('Отменить перевод', 'cancel-btn');
+        btn.addEventListener('click', () => handleCancelBtn(elem));
+    }
+    else {
+        btn = createBtn('Принять перевод', 'get-btn');
+        btn.addEventListener('click', () => handleGetBtn(elem));
+    }
+    return btn;
+
+}
+
 const createDivLiCont = (type) => {
 
     const divLiCont = document.createElement('div');
@@ -34,15 +49,7 @@ const createDivLiCont = (type) => {
         const li = createLI(elem[1], type);
 
         if (elem[1].isAvaible && !elem[1].isReceived) {
-            let btn;
-            if (type === 'sent') {
-                btn = createBtn('Отменить перевод', 'cancel-btn');
-                btn.addEventListener('click', () => handleCancelBtn(elem));
-            }
-            else {
-                btn = createBtn('Принять перевод', 'get-btn');
-                btn.addEventListener('click', () => handleGetBtn(elem));
-            }
+            const btn = createTypeBtn(type);
             li.append(btn);
         }
 
@@ -67,11 +74,13 @@ const appendToList = (type, transfers) => {
     
 }
 
-const renderSendTrans = async () => {
-    recTransText.classList.remove('selected');
-    senderTransText.classList.add('selected');
-    transfers = await getTransfers();
-    appendToList('sent', transfers);
+export const renderSendTrans = async () => {
+    if (document.location.pathname === '/transfers.html') {
+        recTransText.classList.remove('selected');
+        senderTransText.classList.add('selected');
+        transfers = await getTransfers();
+        appendToList('sent', transfers);
+    }
 }
 
 const renderRecTrans = async () => {
@@ -97,7 +106,6 @@ closeText.addEventListener('click', () => {
 codeInput.addEventListener('input', () => {
 
     if (codeInput.value.trim() !== '') {
-        console.log(codeInput.value)
         btn.disabled = false;
     }
     else {
@@ -107,36 +115,41 @@ codeInput.addEventListener('input', () => {
 });
 
 const handleCancelBtn = async (elem) => {
+
     if (confirm('Вы действительно хотите отменить перевод?')) {
-        transfers = await getAllTransfers();
         cancelTransfer(elem[0])
-        await renderSendTrans();
+        transfers = await getTransfers();
+        appendToList('sent', transfers);
         alert('Перевод успешно отменен');
     }
 }
 
+const codeFormSubmit = async (elem) => {
+    if (elem[1].code === codeInput.value) {
+        alert('Вы получили перевод');
+    }
+    else {
+        alert('Перевод отменен');
+    }
+    await getMoney(elem[0], codeInput.value);
+    codeForm.reset();
+    modalInp.classList.add('dis');
+    await renderRecTrans();
+}
+
 const handleGetBtn = (elem) => {
+
     modalInp.classList.toggle('dis');
+    document.body.classList.add('hide');
 
     codeForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-        if (elem[1].code === codeInput.value) {
-            alert('Вы получили перевод');
-        }
-        else {
-            alert('Перевод отменен');
-        }
-        await getMoney(elem[0], codeInput.value);
-        codeForm.reset();
-        modalInp.classList.add('dis');
-        await renderRecTrans();
+        codeFormSubmit(elem);
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', async () => {
-    transfers = await getTransfers();
-    appendToList('sent', transfers);
+    await renderSendTrans();
     btn.disabled = true;
     codeForm.reset();
 });

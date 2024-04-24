@@ -1,4 +1,4 @@
-const contractAddress = "0xe6F576Ee775C2AE6875C0cf005d66aF3aB97302C";
+const contractAddress = "0x424Cf38A3878B97552eCEc0e34F911F3084261aF";
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
 const abi = [
 	{

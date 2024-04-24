@@ -20,7 +20,7 @@ const handleFormSubmit = (event) => {
 
     const value = select.value;
     sessionStorage.setItem('currentAccount', value);
-    window.location.replace('lk.html');
+    window.location.replace('account.html');
 
 }
 

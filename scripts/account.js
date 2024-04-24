@@ -7,11 +7,25 @@ const transferList = document.querySelector('.transfer-list');
 const showTransLi = document.getElementById('show-transfer');
 
 const currentAccount = sessionStorage.currentAccount;
+let transfers;
 
 
-const appendToList = async (id) => {
+const createLICont = () => {
 
-    const transfers = await getSenderTransfers(currentAccount);
+    const divLiCont = document.createElement('div');
+    divLiCont.classList.add('li-cont');
+
+    for (const elem of transfers.slice(-2).reverse()) {
+        const li = createLI(elem, 'sent');
+        divLiCont.append(li);
+    }
+    return divLiCont;
+}
+
+
+const appendToList = async () => {
+
+    transfers = await getSenderTransfers(currentAccount);
     transferList.innerHTML = '';
 
     if (transfers.length === 0) {
@@ -19,12 +33,7 @@ const appendToList = async (id) => {
     }
 
     for (let i = 0; i < 2; i++) {
-        const divLiCont = document.createElement('div');
-        divLiCont.classList.add('li-cont');
-        for (const elem of transfers.slice(-2).reverse()) {
-            const li = createLI(elem, id);
-            divLiCont.append(li);
-        }
+        const divLiCont = createLICont();
         transferList.append(divLiCont);
         transfers.splice(transfers.length - 2, 2);
     }
@@ -33,16 +42,16 @@ const appendToList = async (id) => {
 
 export const showInformation = async () => {
 
-    if (document.location.pathname === '/lk.html') {
+    if (window.location.pathname === '/account.html') {
         accountText.textContent = `${currentAccount}`
         balanceText.textContent = `${await getBalanceOf(currentAccount)} ETH`;
-        appendToList('sent');
+        appendToList();
     }
 
 }
 
 showTransLi.addEventListener('click', () => {
-    window.location.href = 'trasn-history.html';
+    window.location.href = './transfers.html';
 }); 
 
 document.addEventListener('DOMContentLoaded', async () => {
